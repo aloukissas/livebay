@@ -17,14 +17,21 @@ defmodule LivebayWeb.Router do
   scope "/", LivebayWeb do
     pipe_through(:browser)
 
-    get("/", PageController, :home)
+    get "/", PageController, :home
 
-    live("/users", UserLive.Index, :index)
-    live("/users/new", UserLive.Index, :new)
-    live("/users/:id/edit", UserLive.Index, :edit)
+    live "/users", UserLive.Index, :index
+    live "/users/new", UserLive.Index, :new
+    live "/users/:id/edit", UserLive.Index, :edit
 
-    live("/users/:id", UserLive.Show, :show)
-    live("/users/:id/show/edit", UserLive.Show, :edit)
+    live "/users/:id", UserLive.Show, :show
+    live "/users/:id/show/edit", UserLive.Show, :edit
+
+    live "/listings", ListingLive.Index, :index
+    live "/listings/new", ListingLive.Index, :new
+    live "/listings/:id/edit", ListingLive.Index, :edit
+
+    live "/listings/:id", ListingLive.Show, :show
+    live "/listings/:id/show/edit", ListingLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

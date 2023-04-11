@@ -1,0 +1,29 @@
+<.header>
+  Listing <%= @listing.id %>
+  <:subtitle>This is a listing record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/listings/#{@listing}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit listing</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Title"><%= @listing.title %></:item>
+  <:item title="Description"><%= @listing.description %></:item>
+  <:item title="Photos"><%= @listing.photos %></:item>
+  <:item title="Min bid cents"><%= @listing.min_bid_cents %></:item>
+</.list>
+
+<.back navigate={~p"/listings"}>Back to listings</.back>
+
+<.modal :if={@live_action == :edit} id="listing-modal" show on_cancel={JS.patch(~p"/listings/#{@listing}")}>
+  <.live_component
+    module={LivebayWeb.ListingLive.FormComponent}
+    id={@listing.id}
+    title={@page_title}
+    action={@live_action}
+    listing={@listing}
+    patch={~p"/listings/#{@listing}"}
+  />
+</.modal>
